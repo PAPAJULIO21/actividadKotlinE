@@ -14,7 +14,7 @@ fun main(){
 }
 
 fun anagrama(primeraPalabra: String, segundaPalabra: String): String {
-
+// En una busqueda por internet encontre el metodo reversed que le da la vuelta a la palabra
     if (primeraPalabra == segundaPalabra.reversed()){
         return "¿Las palbras $primeraPalabra y $segundaPalabra son anagramas?: True"
     }
