@@ -1,6 +1,6 @@
 package tercerEjercicio
 
-fun main(){
+fun main() {
     val primera = "{a + b [c] * (2x2)}}}}"
     val segunda = "{ [ a * ( c + d ) ] - 5 }"
     val tercera = "{ a * ( c + d ) ] - 5 }"
@@ -16,28 +16,37 @@ fun main(){
     println(estaBalanceada(quinta))
     println(estaBalanceada(sexta))
     println(estaBalanceada(septima))
-
 }
 
 fun estaBalanceada(expresion: String): String {
-    val listaDeDelimitadores = mutableListOf<Char>()
+
+    var countLlaveAbierta = 0
+    var countCorcheteAbierto = 0
+    var countParentesisAbierto = 0
+
     for (char in expresion) {
         when (char) {
-            '{', '[', '(' ,'}', ']', ')' -> listaDeDelimitadores.add(char)
+            '{' -> countLlaveAbierta++
+            '}' -> {
+                countLlaveAbierta--
+                if (countLlaveAbierta < 0) return "$expresion ¿Está balanceada? No"
+            }
+            '[' -> countCorcheteAbierto++
+            ']' -> {
+                countCorcheteAbierto--
+                if (countCorcheteAbierto < 0) return "$expresion ¿Está balanceada? No"
+            }
+            '(' -> countParentesisAbierto++
+            ')' -> {
+                countParentesisAbierto--
+                if (countParentesisAbierto < 0) return "$expresion ¿Está balanceada? No"
+            }
         }
     }
 
-    for (i in listaDeDelimitadores){
-        if (i == '{' && listaDeDelimitadores.lastOrNull() != '}')
-            return "$expresion ¿esta balanceada? No"
-        if (i == '[' && listaDeDelimitadores.lastOrNull()!= ']')
-            return "$expresion ¿esta balanceada? No"
-        if (i == '(' && listaDeDelimitadores.lastOrNull()!= ')')
-            return "$expresion ¿esta balanceada? No"
-
-        listaDeDelimitadores.removeLast()
+    return if (countLlaveAbierta == 0 && countCorcheteAbierto == 0 && countParentesisAbierto == 0) {
+        "$expresion ¿Está balanceada? Sí"
+    } else {
+        "$expresion ¿Está balanceada? No"
     }
-
-
-   return "$expresion ¿esta balanceada? Si"
 }
