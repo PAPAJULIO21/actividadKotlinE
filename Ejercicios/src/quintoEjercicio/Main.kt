@@ -87,5 +87,5 @@ fun resultado(matriz: List<List<String>>): String {
     }else{
         return "NULL"
     }
-    return "NULL"
+    return "EMPATE"
 }
