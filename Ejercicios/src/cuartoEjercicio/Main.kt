@@ -1,5 +1,7 @@
 package cuartoEjercicio
 
+import kotlin.math.absoluteValue
+
 fun main(){
     val arrayPrimero: Array<String> = arrayOf("correr", "saltar", "correr", "saltar", "correr")
     var stringPrimero = "_|_|_"
@@ -43,8 +45,8 @@ fun superadoCarrera(array: Array<String>, string: String): String {
     var bienOMal = true
     var stringFinal = string
 
-    if (array.size > string.length) {
-        val diferencia = array.size - stringFinal.length
+    if (array.size != string.length) {
+        val diferencia = (array.size - stringFinal.length).absoluteValue
         stringFinal = string + "?".repeat(diferencia)
     }
 
@@ -69,5 +71,10 @@ fun superadoCarrera(array: Array<String>, string: String): String {
         }
     }
 
-    return "$listaDeLaCarrera  $bienOMal"
+    if (string.length > array.size) {
+        listaDeLaCarrera.addAll("?".repeat(string.length - array.size).toList())
+        bienOMal = false
+    }
+
+    return "${listaDeLaCarrera.joinToString("")}  $bienOMal"
 }
